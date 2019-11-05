@@ -41,7 +41,7 @@ spec:
             - name: http
               containerPort: 80
               protocol: TCP
-          {{- if or (eq $.Values.environment "uat") (eq $service.servicename "worker")}}
+          {{- if  and (ne $.Values.environment "dev") (ne $service.servicename "worker") }}
           livenessProbe:
             httpGet:
               path: /
@@ -49,7 +49,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /
-              port: http
+              port: http  
           {{- end }}
 ---
 {{- end }}
