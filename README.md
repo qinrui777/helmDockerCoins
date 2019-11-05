@@ -2,6 +2,8 @@
 Deploy docker coins with helm
 
 
+[**作业要求**](https://github.com/qinrui777/helmDockerCoins/blob/master/101-exam.md)
+
 ### 1. create namespace
 ```bash
 kubectl create namespace dev
@@ -19,7 +21,7 @@ kubectl apply -f /vagrant/apps/kubercoins/redis-service.yaml -n uat
 ```
 
 ### 3. 用helm部署dev,uat环境
-- 调试（部署前）
+- 调试（部署前）  
 `helm install ./coins-dev-uat --set environment=dev --dry-run --debug | less`
 
 - 部署
@@ -30,7 +32,7 @@ helm install ./coins-dev-uat --name coins1 --namespace dev --set environment=dev
 helm install ./coins-dev-uat --name coins2 --namespace uat --set environment=uat
 ```
 
-- 删除release（部署后）
+- 删除release（部署后）  
 `helm delete --purge coinsX`
 
 
@@ -55,12 +57,12 @@ NAME                       HOSTS                             ADDRESS   PORTS   A
 ingress.extensions/webui   dev-webui.192.168.33.101.nip.io             80      66m
 ```
 
-浏览器访问：
+浏览器访问：  
 - dev http://dev-webui.192.168.33.101.nip.io/index.html
 - uat http://uat-webui.192.168.33.101.nip.io/index.html
 
-### 部署prod
-在node01上执行
+### 4.部署prod
+在node01上执行  
 `docker run --name prod-redis -d -p 6379:6379 redis:latest`
 
 `helm install ./coins-prod --name coins3 --namespace prod`
