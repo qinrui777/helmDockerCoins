@@ -62,9 +62,14 @@ ingress.extensions/webui   dev-webui.192.168.33.101.nip.io             80      6
 - uat http://uat-webui.192.168.33.101.nip.io/index.html
 
 ### 4.部署prod
-在node01上执行  
-`docker run --name prod-redis -d -p 6379:6379 redis:latest`
 
+
+```bash
+在node01上执行  
+docker run --name prod-redis -d -p 6379:6379 redis:latest
+```
+
+- 部署
 `helm install ./coins-prod --name coins3 --namespace prod`
 
 
