@@ -1,0 +1,55 @@
+{{- range $service := .Values.services -}}
+apiVersion: apps/v1
+{{ if $service.deployment.enabled -}}
+kind: Deployment
+{{- else -}}
+kind: DaemonSet
+{{- end }}
+metadata:
+  name: {{ $service.servicename }}
+  labels:
+    projectname: {{ $.Values.projectname }}
+    environment: {{ $.Values.environment }}
+    servicename: {{ $service.servicename }}
+spec:
+{{- if $service.deployment.enabled }}
+  replicas: {{ $service.replicaCount }}
+{{- end }}
+  selector:
+    matchLabels:
+      projectname: {{ $.Values.projectname }}
+      environment: {{ $.Values.environment }}
+      servicename: {{ $service.servicename }}
+  template:
+    metadata:
+      labels:
+        projectname: {{ $.Values.projectname }}
+        environment: {{ $.Values.environment }}
+        servicename: {{ $service.servicename }}
+    spec:
+      containers:
+        - name: {{ $service.servicename }}
+          image: "{{ $service.image.repository }}:{{ $service.image.tag }}"
+          env:
+          - name: PROJECT_NAME
+            value: {{ $.Values.projectname }}
+          - name: ENVIRONMENT
+            value: {{ $.Values.environment }}
+          - name: SERVICE_NAME
+            value: {{ $service.servicename }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          {{- if or (eq $.Values.environment "uat") (eq $service.servicename "worker")}}
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          {{- end }}
+---
+{{- end }}

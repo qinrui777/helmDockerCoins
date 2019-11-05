@@ -1,0 +1,17 @@
+{{- range $service := .Values.services }}
+{{- if $service.ingress.enabled }}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ $service.servicename }}
+spec:
+  rules:
+  - host: "{{ $.Values.environment }}-{{ $service.servicename }}.192.168.33.101.nip.io"
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: {{ $service.servicename }}
+          servicePort: {{ $service.service.port }}
+{{- end }}
+{{- end }}
