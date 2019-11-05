@@ -55,6 +55,10 @@ NAME                       HOSTS                             ADDRESS   PORTS   A
 ingress.extensions/webui   dev-webui.192.168.33.101.nip.io             80      66m
 ```
 
+浏览器访问：
+- dev http://dev-webui.192.168.33.101.nip.io/index.html
+- uat http://uat-webui.192.168.33.101.nip.io/index.html
+
 ### 部署prod
 在node01上执行
 `docker run --name prod-redis -d -p 6379:6379 redis:latest`
@@ -62,4 +66,5 @@ ingress.extensions/webui   dev-webui.192.168.33.101.nip.io             80      6
 `helm install ./coins-prod --name coins3 --namespace prod`
 
 
-
+浏览器访问：
+- prod http://webui.192.168.33.101.nip.io/index.html

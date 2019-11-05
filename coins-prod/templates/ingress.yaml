@@ -6,7 +6,7 @@ metadata:
   name: {{ $service.servicename }}
 spec:
   rules:
-  - host: "{{ $.Values.environment }}-{{ $service.servicename }}.192.168.33.101.nip.io"
+  - host: "{{ $service.servicename }}.192.168.33.101.nip.io"
     http:
       paths:
       - path: /
