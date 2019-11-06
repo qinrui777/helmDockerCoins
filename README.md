@@ -81,3 +81,4 @@ Ref:
 - https://whmzsu.github.io/helm-doc-zh-cn/chart/charts-zh_cn.html
 - https://docs.bitnami.com/kubernetes/how-to/create-your-first-helm-chart/
 - https://ezmo.me/2017/09/24/helm-quick-toturial/
+- cirror是专门为测试虚拟环境的客户端,提供的较多工具 `kubectl run cirror-$RANDOM --rm -it --image=cirros -- /bin/sh`
