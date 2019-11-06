@@ -63,7 +63,6 @@ ingress.extensions/webui   dev-webui.192.168.33.101.nip.io             80      6
 
 ### 4.部署prod
 
-
 ```bash
 在node01上执行  
 docker run --name prod-redis -d -p 6379:6379 redis:latest
@@ -72,6 +71,13 @@ docker run --name prod-redis -d -p 6379:6379 redis:latest
 - 部署
 `helm install ./coins-prod --name coins3 --namespace prod`
 
-
 浏览器访问：
 - prod http://webui.192.168.33.101.nip.io/index.html
+
+
+---
+Ref:
+- https://helm.sh/docs/developing_charts/#charts
+- https://whmzsu.github.io/helm-doc-zh-cn/chart/charts-zh_cn.html
+- https://docs.bitnami.com/kubernetes/how-to/create-your-first-helm-chart/
+- https://ezmo.me/2017/09/24/helm-quick-toturial/
